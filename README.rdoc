@@ -12,6 +12,7 @@ redis.listen_addr:: Address to listen on. Defaults to localhost.
 redis.listen_port:: Port to listen on.
 redis.appendonly:: Use the AOF file writing system.
 redis.vm.enabled:: Use Redis' virtual memory.
+redis.action:: Install or Upgrade the package?
 
 Additional attributes are available for performance tuning, see attributes/default.rb for more information.
 

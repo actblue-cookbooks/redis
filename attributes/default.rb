@@ -26,3 +26,4 @@ default[:redis][:vm][:max_memory] = "0"
 default[:redis][:vm][:page_size] = "32"
 default[:redis][:vm][:pages] = "134217728"
 default[:redis][:vm][:max_threads] = "4"
+default[:redis][:action] = :install

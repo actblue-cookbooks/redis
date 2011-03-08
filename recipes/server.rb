@@ -19,7 +19,7 @@
 
 package "redis" do
   package_name "redis-server"
-  action :install
+  action node[:redis][:action]
 end
 
 service "redis" do
