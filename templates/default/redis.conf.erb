@@ -195,6 +195,7 @@ appendonly <%= @appendonly %>
 # appendfsync no
 appendfsync <%= @appendfsync %>
 
+<% if @vm[:enabled] then -%>
 ################################ VIRTUAL MEMORY ###############################
 
 # Virtual Memory allows Redis to work with datasets bigger than the actual
@@ -267,6 +268,7 @@ vm-pages <%= @vm[:pages] %>
 # The special value of 0 turn off threaded I/O and enables the blocking
 # Virtual Memory implementation.
 vm-max-threads <%= @vm[:max_threads] %>
+<% end -%>
 
 ############################### ADVANCED CONFIG ###############################
 
