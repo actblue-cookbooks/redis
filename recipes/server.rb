@@ -24,7 +24,7 @@ end
 
 service "redis" do
   service_name "redis-server"
-  supports :status => true, :restart => true
+  supports :status => false, :restart => true
   action :enable
 end
 
