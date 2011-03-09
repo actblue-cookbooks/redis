@@ -195,7 +195,7 @@ appendonly <%= @appendonly %>
 # appendfsync no
 appendfsync <%= @appendfsync %>
 
-<% if @vm[:enabled] then -%>
+<% if @vm[:enabled] == "yes" then -%>
 ################################ VIRTUAL MEMORY ###############################
 
 # Virtual Memory allows Redis to work with datasets bigger than the actual
@@ -281,8 +281,8 @@ glueoutputbuf yes
 # have at max a given numer of elements, and the biggest element does not
 # exceed a given threshold. You can configure this limits with the following
 # configuration directives.
-hash-max-zipmap-entries 64
-hash-max-zipmap-value 512
+#hash-max-zipmap-entries <%= @hash_max_zipmap_entries %>
+#hash-max-zipmap-value <%= @hash_max_zipmap_value %>
 
 # Active rehashing uses 1 millisecond every 100 milliseconds of CPU time in
 # order to help rehashing the main Redis hash table (the one mapping top-level
@@ -302,7 +302,7 @@ hash-max-zipmap-value 512
 #
 # use "activerehashing yes" if you don't have such hard requirements but
 # want to free memory asap when possible.
-activerehashing yes
+#activerehashing yes
 
 ################################## INCLUDES ###################################
 
