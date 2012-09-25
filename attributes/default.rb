@@ -30,3 +30,7 @@ default[:redis][:action] = :install
 default[:redis][:loglevel] = "notice"
 default[:redis][:hash_max_zipmap_entries] = 512
 default[:redis][:hash_max_zipmap_value] = 128
+
+# If you want a backport repo, define these
+default[:redis][:backport][:repo] = nil
+default[:redis][:backport][:key] = nil

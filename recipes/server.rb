@@ -17,6 +17,16 @@
 # limitations under the License.
 #
 
+apt_repository "redis-backport" do
+  uri node[:redis][:backport][:repo]
+  key node[:redis][:backport][:key]
+  keyserver "keyserver.ubuntu.com"
+  distribution "lucid"
+  components ["main"]
+  action :add
+  not_if { node[:redis][:backport][:repo].nil? or node[:redis][:backport][:key].nil? }
+end
+
 package "redis" do
   package_name "redis-server"
   action node[:redis][:action]
