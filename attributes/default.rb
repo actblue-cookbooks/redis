@@ -27,10 +27,13 @@ default[:redis][:vm][:page_size] = "32"
 default[:redis][:vm][:pages] = "134217728"
 default[:redis][:vm][:max_threads] = "4"
 default[:redis][:action] = :install
-default[:redis][:loglevel] = "notice"
 default[:redis][:hash_max_zipmap_entries] = 512
 default[:redis][:hash_max_zipmap_value] = 128
 
 # If you want a backport repo, define these
 default[:redis][:backport][:repo] = nil
 default[:redis][:backport][:key] = nil
+
+default[:redis][:loglevel] = "notice"
+# setting syslog facility will enable it. May need a new redis
+default[:redis][:syslog_facility] = nil

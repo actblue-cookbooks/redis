@@ -48,6 +48,18 @@ logfile /var/log/redis/redis-server.log
 # dbid is a number between 0 and 'databases'-1
 databases 16
 
+<% if not node[:redis][:syslog_facility].nil? -%>
+# To enable logging to the system logger, just set 'syslog-enabled' to yes,
+# and optionally update the other syslog parameters to suit your needs.
+syslog-enabled yes
+
+# Specify the syslog identity.
+syslog-ident redis
+
+# Specify the syslog facility.  Must be USER or between LOCAL0-LOCAL7.
+syslog-facility <%= node[:redis][:syslog_facility].nil? %>
+<% end -%>
+
 ################################ SNAPSHOTTING  #################################
 #
 # Save the DB on disk:
