@@ -1,39 +1,66 @@
-#
-# Cookbook Name:: redis
-# Attributes:: default
-#
-# Copyright 2010, Atari, Inc
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-# 
-#     http://www.apache.org/licenses/LICENSE-2.0
-# 
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+# Override this if you build your own package
+default['redis']['package_version'] = nil
 
-default[:redis][:listen_addr] = "127.0.0.1"
-default[:redis][:listen_port] = "6379"
-default[:redis][:appendonly] = "no"
-default[:redis][:appendfsync] = "everysec"
-default[:redis][:vm][:enabled] = "no"
-default[:redis][:vm][:max_memory] = "0"
-default[:redis][:vm][:page_size] = "32"
-default[:redis][:vm][:pages] = "134217728"
-default[:redis][:vm][:max_threads] = "4"
-default[:redis][:action] = :install
-default[:redis][:hash_max_zipmap_entries] = 512
-default[:redis][:hash_max_zipmap_value] = 128
-
-# If you want a backport repo, define these
-default[:redis][:backport][:repo] = nil
-default[:redis][:backport][:key] = nil
-
-default[:redis][:loglevel] = "notice"
-# setting syslog facility will enable it. May need a new redis
-default[:redis][:syslog_facility] = nil
+# By default, listen on all interfaces. Set to an IP address to only listen on that address.
+default['redis']['config']['bind'] = nil
+# Set to 0 to disable TCP
+default['redis']['config']['port'] = 6379
+# By default, disable unix socket. Set to a path (e.g. /var/run/redis/redis.sock) to enable.
+default['redis']['config']['unixsocket'] = nil
+default['redis']['config']['unixsocketperm'] = 755
+# Other config options
+default['redis']['config']['timeout'] = nil
+default['redis']['config']['tcp_keepalive'] = nil
+default['redis']['config']['loglevel'] = 'notice'
+default['redis']['config']['logfile'] = '/var/log/redis/redis-server.log'
+default['redis']['config']['syslog']['enabled'] = false
+default['redis']['config']['syslog']['ident'] = 'redis'
+default['redis']['config']['syslog']['facility'] = 'local0'
+default['redis']['config']['databases'] = 16
+default['redis']['config']['save'] = { 900 => 1, 300 => 10, 60 => 10000 }
+default['redis']['config']['stop_writes_on_bgsave_error'] = true
+default['redis']['config']['rdbcompression'] = true
+default['redis']['config']['rdbchecksum'] = true
+default['redis']['config']['dbfilename'] = 'dump.rdb'
+default['redis']['config']['dir'] = '/var/lib/redis'
+default['redis']['config']['repl']['ip'] = nil
+default['redis']['config']['repl']['port'] = nil
+default['redis']['config']['repl']['auth'] = nil
+default['redis']['config']['repl']['serve_stale_data'] = true
+default['redis']['config']['repl']['read_only'] = true
+default['redis']['config']['repl']['ping'] = 10
+default['redis']['config']['repl']['timeout'] = 60
+default['redis']['config']['repl']['disable_tcp_nodelay'] = false
+default['redis']['config']['repl']['backlog_size'] = '1mb'
+default['redis']['config']['repl']['backlog_ttl'] = 3600
+default['redis']['config']['repl']['priority'] = 100
+default['redis']['config']['repl']['min_writes'] = nil
+default['redis']['config']['repl']['max_lag'] = 10
+default['redis']['config']['requirepass'] = nil
+default['redis']['config']['rename_commands'] = {}
+default['redis']['config']['maxclients'] = nil
+default['redis']['config']['maxmemory'] = nil
+default['redis']['config']['maxmemory_policy'] = 'volatile-lru'
+default['redis']['config']['maxmemory_samples'] = 3
+default['redis']['config']['appendonly'] = false
+default['redis']['config']['appendfilename'] = 'appendonly.aof'
+default['redis']['config']['appendfsync'] = 'everysec'
+default['redis']['config']['no_appendfsync_on_rewrite'] = false
+default['redis']['config']['auto_aof_rewrite_percentage'] = 100
+default['redis']['config']['auto_aof_rewrite_min_size'] = '64mb'
+default['redis']['config']['lua_time_limit'] = 5000
+default['redis']['config']['slowlog_log_slower_than'] = 10000
+default['redis']['config']['slowlog_max_len'] = 128
+default['redis']['config']['hash_max_ziplist_entries'] = 512
+default['redis']['config']['hash_max_ziplist_value'] = 64
+default['redis']['config']['list_max_ziplist_entries'] = 512
+default['redis']['config']['list_max_ziplist_value'] = 64
+default['redis']['config']['set_max_intset_entries'] = 512
+default['redis']['config']['zset_max_ziplist_entries'] = 128
+default['redis']['config']['zset_max_ziplist_value'] = 64
+default['redis']['config']['activerehashing'] = true
+default['redis']['config']['client_output_buffer_limit']['normal'] = '0 0 0'
+default['redis']['config']['client_output_buffer_limit']['repl'] = '256mb 64mb 60'
+default['redis']['config']['client_output_buffer_limit']['pubsub'] = '32mb 8mb 60'
+default['redis']['config']['hz'] = 10
+default['redis']['config']['aof_rewrite_incremental_fsync'] = true
